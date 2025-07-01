@@ -14,6 +14,15 @@ func NewOrderedHeap[T cmp.Ordered]() *Heap[T] {
 
 // NewHeap creates a new Heap using the given less function for ordering. To create a
 // min or a max heap, adjust the less function accordingly.
+// For example,
+//
+//	h := NewHeap(func(a, b int) bool { return a < b })
+//
+// to create a new min heap using the int type. And logically
+//
+//	h := NewHeap(func(a, b int) bool { return a > b })
+//
+// for a max heap.
 func NewHeap[T any](less func(a, b T) bool) *Heap[T] {
 	return &Heap[T]{
 		less: less,
