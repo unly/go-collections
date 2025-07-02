@@ -1,4 +1,4 @@
-module go-collections
+module github.com/unly/go-collections
 
 go 1.23
 
