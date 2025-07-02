@@ -33,11 +33,8 @@ pop := q.Pop() // returns 42
 ## set
 
 ```go
-// a set can be created empty
-s := NewSet[int]()
-
-// or with initial values
-s := NewSet(42, 43)
+var s Set[int]
+s.Add(42, 43)
 
 if s.Contains(42) { 
     // do something
