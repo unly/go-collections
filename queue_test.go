@@ -17,8 +17,7 @@ func TestQueue_Push(t *testing.T) {
 	t.Run("push second item", func(t *testing.T) {
 		var q Queue[int]
 
-		q.Push(42)
-		q.Push(43)
+		q.Push(42, 43)
 
 		assert.Equal(t, 42, q.Peek())
 	})
@@ -33,9 +32,7 @@ func TestQueue_Pop(t *testing.T) {
 
 	t.Run("sample items", func(t *testing.T) {
 		var q Queue[int]
-		q.Push(42)
-		q.Push(43)
-		q.Push(44)
+		q.Push(42, 43, 44)
 
 		assert.Equal(t, 42, q.Pop())
 		assert.Equal(t, 43, q.Pop())
@@ -51,9 +48,7 @@ func TestQueue_Peek(t *testing.T) {
 	})
 	t.Run("sample items", func(t *testing.T) {
 		var q Queue[int]
-		q.Push(42)
-		q.Push(43)
-		q.Push(44)
+		q.Push(42, 43, 44)
 
 		assert.Equal(t, 42, q.Peek())
 	})
@@ -67,9 +62,7 @@ func TestQueue_Size(t *testing.T) {
 	})
 	t.Run("sample items", func(t *testing.T) {
 		var q Queue[int]
-		q.Push(42)
-		q.Push(43)
-		q.Push(44)
+		q.Push(42, 43, 44)
 
 		assert.Equal(t, 3, q.Size())
 	})
@@ -86,9 +79,7 @@ func TestQueue_Values(t *testing.T) {
 
 	t.Run("sample items", func(t *testing.T) {
 		var q Queue[int]
-		q.Push(42)
-		q.Push(43)
-		q.Push(44)
+		q.Push(42, 43, 44)
 
 		var got []int
 		for i := range q.Values() {
@@ -110,9 +101,7 @@ func TestQueue_Ordered(t *testing.T) {
 
 	t.Run("sample items", func(t *testing.T) {
 		var q Queue[int]
-		q.Push(42)
-		q.Push(43)
-		q.Push(44)
+		q.Push(42, 43, 44)
 
 		var got []int
 		for i := range q.Ordered() {

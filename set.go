@@ -19,8 +19,10 @@ func (s *Set[T]) Add(items ...T) {
 	}
 }
 
-func (s *Set[T]) Delete(item T) {
-	delete(s.s, item)
+func (s *Set[T]) Delete(items ...T) {
+	for _, i := range items {
+		delete(s.s, i)
+	}
 }
 
 func (s *Set[T]) Contains(item T) bool {

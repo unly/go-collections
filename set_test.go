@@ -42,15 +42,13 @@ func TestSet_Contains(t *testing.T) {
 func TestSet_ContainsAll(t *testing.T) {
 	t.Run("contains all items", func(t *testing.T) {
 		var s Set[int]
-		s.Add(42)
-		s.Add(43)
+		s.Add(42, 43)
 
 		assert.True(t, s.ContainsAll(42, 43))
 	})
 	t.Run("does not contain all items", func(t *testing.T) {
 		var s Set[int]
-		s.Add(42)
-		s.Add(43)
+		s.Add(42, 43)
 
 		assert.False(t, s.ContainsAll(42, 43, 44))
 	})
@@ -67,13 +65,23 @@ func TestSet_Delete(t *testing.T) {
 
 		assert.False(t, s.Contains(42))
 	})
+	t.Run("delete multiple items", func(t *testing.T) {
+		var s Set[int]
+		s.Add(42, 43, 44)
+
+		assert.True(t, s.Contains(42))
+		assert.True(t, s.Contains(43))
+
+		s.Delete(42, 43)
+
+		assert.False(t, s.Contains(42))
+		assert.False(t, s.Contains(43))
+	})
 }
 
 func TestSet_Values(t *testing.T) {
 	var s Set[int]
-	s.Add(42)
-	s.Add(43)
-	s.Add(44)
+	s.Add(42, 43, 44)
 
 	var got []int
 	for i := range s.Values() {

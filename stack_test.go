@@ -16,8 +16,7 @@ func TestStack_Push(t *testing.T) {
 	t.Run("multiple items", func(t *testing.T) {
 		var s Stack[int]
 
-		s.Push(42)
-		s.Push(45)
+		s.Push(42, 45)
 		assert.Equal(t, 45, s.Pop())
 		assert.Equal(t, 42, s.Pop())
 	})
@@ -60,9 +59,7 @@ func TestStack_Size(t *testing.T) {
 	})
 	t.Run("sample items", func(t *testing.T) {
 		var s Stack[int]
-		s.Push(42)
-		s.Push(42)
-		s.Push(42)
+		s.Push(42, 42, 42)
 
 		assert.Equal(t, 3, s.Size())
 	})
@@ -78,9 +75,7 @@ func TestStack_Values(t *testing.T) {
 	})
 	t.Run("sample items", func(t *testing.T) {
 		var s Stack[int]
-		s.Push(42)
-		s.Push(43)
-		s.Push(44)
+		s.Push(42, 43, 44)
 
 		var got []int
 		for i := range s.Values() {
@@ -101,9 +96,7 @@ func TestStack_Ordered(t *testing.T) {
 	})
 	t.Run("sample items", func(t *testing.T) {
 		var s Stack[int]
-		s.Push(42)
-		s.Push(43)
-		s.Push(44)
+		s.Push(42, 43, 44)
 
 		var got []int
 		for i := range s.Ordered() {

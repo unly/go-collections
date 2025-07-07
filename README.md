@@ -24,8 +24,7 @@ h := NewOrderedHeap[int]()
 ```go
 var q Queue[int]
 
-q.Push(42)
-q.Push(43)
+q.Push(42, 43)
 
 pop := q.Pop() // returns 42
 ```
@@ -46,8 +45,7 @@ if s.Contains(42) {
 ```go
 var s Stack[int]
 
-s.Push(42)
-s.Push(43)
+s.Push(42, 43)
 
 pop := s.Pop() // returns 43
 ```

@@ -9,8 +9,8 @@ type Queue[T any] struct {
 	q []T
 }
 
-func (q *Queue[T]) Push(item T) {
-	q.q = append(q.q, item)
+func (q *Queue[T]) Push(items ...T) {
+	q.q = append(q.q, items...)
 }
 
 func (q *Queue[T]) Pop() T {

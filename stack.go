@@ -9,8 +9,8 @@ type Stack[T any] struct {
 	s []T
 }
 
-func (s *Stack[T]) Push(item T) {
-	s.s = append(s.s, item)
+func (s *Stack[T]) Push(items ...T) {
+	s.s = append(s.s, items...)
 }
 
 func (s *Stack[T]) Pop() T {
