@@ -15,7 +15,8 @@ func (q *Queue[T]) Push(items ...T) {
 
 func (q *Queue[T]) Pop() T {
 	if len(q.q) == 0 {
-		return *new(T)
+		var zero T
+		return zero
 	}
 
 	item := q.q[0]
@@ -25,7 +26,8 @@ func (q *Queue[T]) Pop() T {
 
 func (q *Queue[T]) Peek() T {
 	if len(q.q) == 0 {
-		return *new(T)
+		var zero T
+		return zero
 	}
 
 	return q.q[0]
