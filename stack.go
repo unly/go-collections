@@ -15,7 +15,8 @@ func (s *Stack[T]) Push(items ...T) {
 
 func (s *Stack[T]) Pop() T {
 	if len(s.s) == 0 {
-		return *new(T)
+		var zero T
+		return zero
 	}
 
 	item := s.s[len(s.s)-1]
@@ -25,7 +26,8 @@ func (s *Stack[T]) Pop() T {
 
 func (s *Stack[T]) Peek() T {
 	if len(s.s) == 0 {
-		return *new(T)
+		var zero T
+		return zero
 	}
 
 	return s.s[len(s.s)-1]

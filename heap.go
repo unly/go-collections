@@ -48,7 +48,8 @@ func (h *Heap[T]) Push(item T) {
 func (h *Heap[T]) Pop() T {
 	n := len(h.h)
 	if n == 0 {
-		return *new(T)
+		var zero T
+		return zero
 	}
 
 	h.swap(0, n-1)
@@ -60,7 +61,8 @@ func (h *Heap[T]) Pop() T {
 
 func (h *Heap[T]) Peek() T {
 	if len(h.h) == 0 {
-		return *new(T)
+		var zero T
+		return zero
 	}
 
 	return h.h[0]
