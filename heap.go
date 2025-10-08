@@ -30,8 +30,8 @@ func NewHeap[T any](less func(a, b T) bool) *Heap[T] {
 }
 
 type Heap[T any] struct {
-	h    []T
 	less func(x, y T) bool
+	h    []T
 }
 
 func (h *Heap[T]) Push(item T) {
