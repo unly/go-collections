@@ -6,6 +6,17 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestNewOrderedHeap(t *testing.T) {
+	t.Run("variadic create", func(t *testing.T) {
+		h := NewOrderedHeap(10, 8, 9, 7, 6, 5, 4)
+
+		expected := []int{4, 5, 6, 7, 8, 9, 10}
+		for _, exp := range expected {
+			assert.Equal(t, exp, h.Pop())
+		}
+	})
+}
+
 func TestHeap_Push(t *testing.T) {
 	t.Run("", func(t *testing.T) {
 		h := NewOrderedHeap[int]()
@@ -15,6 +26,16 @@ func TestHeap_Push(t *testing.T) {
 		h.Push(3)
 
 		assert.Equal(t, 3, h.Size())
+	})
+
+	t.Run("variadic", func(t *testing.T) {
+		h := NewOrderedHeap[int]()
+		h.Push(10, 8, 9, 4, 6, 5, 7)
+
+		expected := []int{4, 5, 6, 7, 8, 9, 10}
+		for _, exp := range expected {
+			assert.Equal(t, exp, h.Pop())
+		}
 	})
 }
 

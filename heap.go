@@ -7,7 +7,8 @@ import (
 )
 
 // NewOrderedHeap creates a new Heap using NewHeap with the default less function for
-// the given cmp.Ordered type.
+// the given cmp.Ordered type. There can optionally be passed in items to initialize
+// the heap with.
 func NewOrderedHeap[T cmp.Ordered](items ...T) *Heap[T] {
 	return NewHeap(cmp.Less[T], items...)
 }
@@ -22,12 +23,15 @@ func NewOrderedHeap[T cmp.Ordered](items ...T) *Heap[T] {
 //
 //	h := NewHeap(func(a, b int) bool { return a > b })
 //
-// for a max heap.
+// for a max heap. There can optionally be passed in items to initialize
+// the heap with.
 func NewHeap[T any](less func(a, b T) bool, items ...T) *Heap[T] {
-	return &Heap[T]{
+	h := &Heap[T]{
 		less: less,
 		h:    items,
 	}
+	h.init()
+	return h
 }
 
 type Heap[T any] struct {
@@ -36,13 +40,9 @@ type Heap[T any] struct {
 }
 
 func (h *Heap[T]) Push(items ...T) {
-	h.h = append(h.h, items...)
-	j := len(h.h) - 1
-	i := (j - 1) / 2
-	for i != j && h.less(h.h[j], h.h[i]) {
-		h.swap(i, j)
-		j = i
-		i = (j - 1) / 2
+	for _, item := range items {
+		h.h = append(h.h, item)
+		h.up(len(h.h) - 1)
 	}
 }
 
@@ -54,7 +54,7 @@ func (h *Heap[T]) Pop() T {
 	}
 
 	h.swap(0, n-1)
-	h.down()
+	h.down(0, n-1)
 	x := h.h[n-1]
 	var zero T
 	h.h[n-1] = zero
@@ -97,9 +97,25 @@ func (h *Heap[T]) swap(i, j int) {
 	h.h[i], h.h[j] = h.h[j], h.h[i]
 }
 
-func (h *Heap[T]) down() {
-	n := len(h.h) - 1
-	i := 0
+func (h *Heap[T]) init() {
+	n := len(h.h)
+	for i := n/2 - 1; i >= 0; i-- {
+		h.down(i, n)
+	}
+}
+
+func (h *Heap[T]) up(j int) {
+	for {
+		i := (j - 1) / 2
+		if i == j || !h.less(h.h[j], h.h[i]) {
+			return
+		}
+		h.swap(i, j)
+		j = i
+	}
+}
+
+func (h *Heap[T]) down(i, n int) {
 	for {
 		j1 := 2*i + 1
 		if j1 >= n || j1 < 0 { // j1 < 0 after int overflow
