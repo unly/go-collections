@@ -20,7 +20,12 @@ func (q *Queue[T]) Pop() T {
 	}
 
 	item := q.q[0]
+	var zero T
+	q.q[0] = zero
 	q.q = q.q[1:]
+	if len(q.q) == 0 {
+		q.q = nil
+	}
 	return item
 }
 

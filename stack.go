@@ -20,6 +20,8 @@ func (s *Stack[T]) Pop() T {
 	}
 
 	item := s.s[len(s.s)-1]
+	var zero T
+	s.s[len(s.s)-1] = zero
 	s.s = s.s[:len(s.s)-1]
 	return item
 }

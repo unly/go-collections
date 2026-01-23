@@ -8,8 +8,8 @@ import (
 
 // NewOrderedHeap creates a new Heap using NewHeap with the default less function for
 // the given cmp.Ordered type.
-func NewOrderedHeap[T cmp.Ordered]() *Heap[T] {
-	return NewHeap(cmp.Less[T])
+func NewOrderedHeap[T cmp.Ordered](items ...T) *Heap[T] {
+	return NewHeap(cmp.Less[T], items...)
 }
 
 // NewHeap creates a new Heap using the given less function for ordering. To create a
@@ -23,9 +23,10 @@ func NewOrderedHeap[T cmp.Ordered]() *Heap[T] {
 //	h := NewHeap(func(a, b int) bool { return a > b })
 //
 // for a max heap.
-func NewHeap[T any](less func(a, b T) bool) *Heap[T] {
+func NewHeap[T any](less func(a, b T) bool, items ...T) *Heap[T] {
 	return &Heap[T]{
 		less: less,
+		h:    items,
 	}
 }
 
@@ -34,8 +35,8 @@ type Heap[T any] struct {
 	h    []T
 }
 
-func (h *Heap[T]) Push(item T) {
-	h.h = append(h.h, item)
+func (h *Heap[T]) Push(items ...T) {
+	h.h = append(h.h, items...)
 	j := len(h.h) - 1
 	i := (j - 1) / 2
 	for i != j && h.less(h.h[j], h.h[i]) {
@@ -55,6 +56,8 @@ func (h *Heap[T]) Pop() T {
 	h.swap(0, n-1)
 	h.down()
 	x := h.h[n-1]
+	var zero T
+	h.h[n-1] = zero
 	h.h = h.h[:n-1]
 	return x
 }
