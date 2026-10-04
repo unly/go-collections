@@ -79,6 +79,34 @@ func TestSet_Delete(t *testing.T) {
 	})
 }
 
+func TestSet_Eq(t *testing.T) {
+	t.Run("equal sets", func(t *testing.T) {
+		var a, b Set[int]
+		a.Add(42, 43)
+		b.Add(43, 42)
+
+		assert.True(t, a.Eq(&b))
+	})
+	t.Run("different sets", func(t *testing.T) {
+		var a, b Set[int]
+		a.Add(42, 43)
+		b.Add(42, 44)
+
+		assert.False(t, a.Eq(&b))
+	})
+	t.Run("nil other equals empty set", func(t *testing.T) {
+		var s Set[int]
+
+		assert.True(t, s.Eq(nil))
+	})
+	t.Run("nil other differs from non-empty set", func(t *testing.T) {
+		var s Set[int]
+		s.Add(42)
+
+		assert.False(t, s.Eq(nil))
+	})
+}
+
 func TestSet_Values(t *testing.T) {
 	var s Set[int]
 	s.Add(42, 43, 44)

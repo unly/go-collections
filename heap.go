@@ -28,7 +28,7 @@ func NewOrderedHeap[T cmp.Ordered](items ...T) *Heap[T] {
 func NewHeap[T any](less func(a, b T) bool, items ...T) *Heap[T] {
 	h := &Heap[T]{
 		less: less,
-		h:    items,
+		h:    slices.Clone(items),
 	}
 	h.init()
 	return h
@@ -75,10 +75,15 @@ func (h *Heap[T]) Size() int {
 	return len(h.h)
 }
 
+// Values returns an iterator over the items in internal heap order, which is
+// not sorted. Use Ordered for pop order. The heap must not be modified while
+// iterating.
 func (h *Heap[T]) Values() iter.Seq[T] {
 	return slices.Values(h.h)
 }
 
+// Ordered returns an iterator over the items in pop order. It iterates over a
+// copy, so the heap itself is not modified and may be changed while iterating.
 func (h *Heap[T]) Ordered() iter.Seq[T] {
 	return func(yield func(T) bool) {
 		c := Heap[T]{

@@ -43,6 +43,8 @@ func (s *Set[T]) ContainsAll(items ...T) bool {
 	return true
 }
 
+// Values returns an iterator over the items in no particular order. The set
+// must not be modified while iterating.
 func (s *Set[T]) Values() iter.Seq[T] {
 	return maps.Keys(s.s)
 }
@@ -51,6 +53,12 @@ func (s *Set[T]) Size() int {
 	return len(s.s)
 }
 
+// Eq reports whether both sets contain the same items. A nil other is treated
+// as an empty set.
 func (s *Set[T]) Eq(other *Set[T]) bool {
+	if other == nil {
+		return s.Size() == 0
+	}
+
 	return maps.Equal(s.s, other.s)
 }
