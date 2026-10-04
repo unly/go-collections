@@ -39,10 +39,14 @@ func (s *Stack[T]) Size() int {
 	return len(s.s)
 }
 
+// Values returns an iterator over the items from the bottom to the top of the
+// stack. The stack must not be modified while iterating.
 func (s *Stack[T]) Values() iter.Seq[T] {
 	return slices.Values(s.s)
 }
 
+// Ordered returns an iterator over the items in pop order, from the top to the
+// bottom of the stack. The stack must not be modified while iterating.
 func (s *Stack[T]) Ordered() iter.Seq[T] {
 	return func(yield func(T) bool) {
 		for i := len(s.s) - 1; i >= 0; i-- {

@@ -15,6 +15,16 @@ func TestNewOrderedHeap(t *testing.T) {
 			assert.Equal(t, exp, h.Pop())
 		}
 	})
+
+	t.Run("does not modify the caller's slice", func(t *testing.T) {
+		src := []int{5, 3, 1, 4, 2}
+
+		h := NewOrderedHeap(src...)
+		h.Pop()
+		h.Push(0)
+
+		assert.Equal(t, []int{5, 3, 1, 4, 2}, src)
+	})
 }
 
 func TestHeap_Push(t *testing.T) {
