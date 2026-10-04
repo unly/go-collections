@@ -1,0 +1,34 @@
+queue.go
+  s_d0e60fbaa1a051::t_136f19002162c5 51-52
+  s_d0e60fbaa1a051::t_49deab0baa6e51 45-46
+heap.go
+  s_d0e60fbaa1a051::t_4c250a2c08f552 85-86
+  s_d0e60fbaa1a051::t_44c0524001079c 78-80
+  s_d0e60fbaa1a051::t_c3716f6f942e6e 31
+set_test.go
+  s_d0e60fbaa1a051::t_13ff0e2a2333a2 82-109
+set.go
+  s_d0e60fbaa1a051::t_e4d810502e066d 46-47
+  s_d0e60fbaa1a051::t_0f70944328046a 56-57,59-62
+stack.go
+  s_d0e60fbaa1a051::t_1bbca2366ae802 42-43
+  s_d0e60fbaa1a051::t_8e7844eccedafa 48-49
+heap_test.go
+  s_d0e60fbaa1a051::t_07fa043b300723 18-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5e53ec8a3e614de4880752b9999d94530ddaea92",
+  "prompts": {},
+  "sessions": {
+    "s_d0e60fbaa1a051": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "169ec13a-dbac-49b1-a755-b9ad71de62d8",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "unly <unly.dev@posteo.me>"
+    }
+  }
+}
